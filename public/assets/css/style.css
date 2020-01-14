@@ -57,7 +57,7 @@ body {
 }
 
 .chatMessage__input,
-.chatMessage__button
+.chatMessage__button,
 .chatMessage__username,
 .chatMessage__join {
 	font-family: inherit;
@@ -78,27 +78,30 @@ body {
 	border: none;
 }
 
-.emoticon{
-	height:1.5em;
-	width:auto;
+.emoticon {
+	height: 1.4em;
+	width: auto;
 }
 
 .timestamp {
-	color:grey;
+	color: grey;
 	display: block;
 }
-.timestamp.center{
-	text-align: center;
-}
-.timestamp.right{
+
+.timestamp.right {
 	text-align: right;
 }
-.timestamp.left{
+
+.timestamp.left {
 	text-align: left;
 }
 
-.hidden{
-	display:none;
+.timestamp.center {
+	text-align: center;
+}
+
+.hidden {
+	display: none;
 	visibility: hidden;
 	width: 1px;
 	height: 1px;
