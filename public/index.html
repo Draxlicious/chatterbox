@@ -58,6 +58,7 @@
 		</form>
 	</article>
 
+	<script src="assets/js/notification_push.js"></script>
 	<script src="service-worker.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
 	<script src="assets/js/install.js"></script>
@@ -66,7 +67,7 @@
 
 		// sound file
 		var plop = new Audio("/assets/media/plop.mp3")
-		
+
 		var chatButton = document.querySelector(".chatMessage__button")
 		var chatInput = document.querySelector(".chatMessage__input")
 		var chatView = document.querySelector(".mainChatView");
@@ -74,10 +75,10 @@
 		var joinForm = document.querySelectorAll(".chatMessage__form")[1]
 		var username = document.getElementsByClassName("chatMessage__username")[0];
 		var user;
-		
-		joinForm.addEventListener("submit", function(e){
+
+		joinForm.addEventListener("submit", function (e) {
 			e.preventDefault();
-			if(username.value == ""){
+			if (username.value == "") {
 				return;
 			}
 
@@ -87,10 +88,10 @@
 			joinForm.classList.add("hidden");
 			chatForm.classList.remove("hidden");
 		})
-		
-		chatForm.addEventListener("submit", function(e){
+
+		chatForm.addEventListener("submit", function (e) {
 			e.preventDefault();
-			if(chatInput.value == ""){
+			if (chatInput.value == "") {
 				return;
 			}
 
@@ -123,8 +124,8 @@
 			// play sound file
 			plop.play();
 
-				// auto scroll bottom when listening message
-			
+			// auto scroll bottom when listening message
+
 			chatView.scrollTop = chatView.scrollHeight;
 		})
 
@@ -133,7 +134,7 @@
 			// creating p element when text is entered
 			var p = document.createElement('p');
 			p.className = "mainChatView__other";
-			
+
 			let span = document.createElement("span");
 			span.className = "mainChatView__name";
 			span.innerText = msg.username;
@@ -155,7 +156,8 @@
 		});
 
 
-		socket.on("userjoin", function(msg){
+		socket.on("userjoin", function (msg) {
+			var p = document.createElement('p');
 			let small = document.createElement("small");
 			small.className = "timestamp center";
 			small.innerText = `${msg} has joined chat`;
@@ -169,18 +171,19 @@
 
 	<script>
 		// service worker
-		if("serviceWorker" in navigator) {
-			window.addEventListener("load", function() {
+		if ("serviceWorker" in navigator) {
+			window.addEventListener("load", function () {
 				navigator.serviceWorker.register("/service-worker.js")
-					.then(function(reg) {
+					.then(function (reg) {
 						console.log("Service Worker Registered", reg);
 					})
-					.catch(function(err) {
+					.catch(function (err) {
 						console.error(err);
 					});
 			});
 		}
 	</script>
+
 </body>
 
 </html>
