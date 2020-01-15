@@ -107,3 +107,9 @@ body {
 	height: 1px;
 	pointer-events: none;
 }
+
+
+#butInstall {
+	background: none;
+	border: none;
+}

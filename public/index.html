@@ -8,12 +8,13 @@
 	<title>Chatterbox</title>
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-	<meta name="apple-mobile-web-app-title" content="Weather PWA">
-	<meta name="description" content="A sample weather app">
+	<meta name="apple-mobile-web-app-title" content="Chatterbox PWA">
+	<meta name="description" content="A sample chatterbox app">
 	<meta name="theme-color" content="#2F3BA2" />
-	<link rel="apple-touch-icon" href="/images/icons/icon-152x152.png">
-	<link rel="stylesheet" href="manifest.json">
+	<link rel="shortcut icon" href="assets/images/catter128x128.png" type="image/png">
+	<link rel="apple-touch-icon" href="assets/images/catter152x152.png">
 	<link rel="stylesheet" href="/assets/css/style.css">
+	<link rel="stylesheet" href="manifest.json">
 </head>
 
 <body>
@@ -23,6 +24,7 @@
 			<img src="/assets/images/catter.svg" alt="Chatterbox logo" class="siteBrand__logo">
 			Chatterbox
 		</a>
+		<button id="butInstall" aria-label="Install" hidden><img src="/assets/images/install.svg"></button>
 	</nav>
 
 	<article class="mainChatView">
@@ -55,8 +57,9 @@
 		</form>
 	</article>
 
-	<script src="assets/js/serviceWorker.js"></script>
+	<script src="service-worker.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
+	<script src="assets/js/install.js"></script>
 	<script>
 		var socket = io();
 
@@ -161,6 +164,21 @@
 			play.plop();
 			chatView.scrollTop = chatView.scrollHeight;
 		})
+	</script>
+
+	<script>
+		// service worker
+		if("serviceWorker" in navigator) {
+			window.addEventListener("load", function() {
+				navigator.serviceWorker.register("/service-worker.js")
+					.then(function(reg) {
+						console.log("Service Worker Registered", reg);
+					})
+					.catch(function(err) {
+						console.error(err);
+					});
+			});
+		}
 	</script>
 </body>
 
