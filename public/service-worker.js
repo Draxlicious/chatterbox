@@ -18,7 +18,7 @@
 'use strict';
 
 // CODELAB: Update cache names any time any of the cached files change.
-const CACHE_NAME = 'static-cache-v6';
+const CACHE_NAME = 'static-cache-v7';
 
 // CODELAB: Add list of files to cache here.
 const FILES_TO_CACHE = [
@@ -85,44 +85,44 @@ self.addEventListener('fetch', (evt) => {
 // ========================================================================>
 // push notifications
 
-self.addEventListener('notificationclose', function(e) {
-  var notification = e.notification;
-  var primaryKey = notification.data.primaryKey;
+// self.addEventListener('notificationclose', function(e) {
+//   var notification = e.notification;
+//   var primaryKey = notification.data.primaryKey;
 
-  console.log('Closed notification: ' + primaryKey);
-});
+//   console.log('Closed notification: ' + primaryKey);
+// });
 
 
-self.addEventListener('notificationclick', function(e) {
-  var notification = e.notification;
-  var primaryKey = notification.data.primaryKey;
-  var action = e.action;
+// self.addEventListener('notificationclick', function(e) {
+//   var notification = e.notification;
+//   var primaryKey = notification.data.primaryKey;
+//   var action = e.action;
 
-  if (action === 'close') {
-    notification.close();
-  } else {
-    clients.openWindow('http://www.example.com');
-    notification.close();
-  }
-});
+//   if (action === 'close') {
+//     notification.close();
+//   } else {
+//     clients.openWindow('http://www.example.com');
+//     notification.close();
+//   }
+// });
 
-self.addEventListener('push', function(e) {
-  var options = {
-    body: 'This notification was generated from a push!',
-    icon: '/assets/images/smile.png',
-    vibrate: [100, 50, 100],
-    data: {
-      dateOfArrival: Date.now(),
-      primaryKey: '2'
-    },
-    actions: [
-      {action: 'explore', title: 'Explore this new world',
-        icon: '/assets/images/smile.png'},
-      {action: 'close', title: 'Close',
-        icon: '/assets/images/smile.png'},
-    ]
-  };
-  e.waitUntil(
-    self.registration.showNotification('Hello world!', options)
-  );
-});
+// self.addEventListener('push', function(e) {
+//   var options = {
+//     body: 'This notification was generated from a push!',
+//     icon: '/assets/images/smile.png',
+//     vibrate: [100, 50, 100],
+//     data: {
+//       dateOfArrival: Date.now(),
+//       primaryKey: '2'
+//     },
+//     actions: [
+//       {action: 'explore', title: 'Explore this new world',
+//         icon: '/assets/images/smile.png'},
+//       {action: 'close', title: 'Close',
+//         icon: '/assets/images/smile.png'},
+//     ]
+//   };
+//   e.waitUntil(
+//     self.registration.showNotification('Hello world!', options)
+//   );
+// });
