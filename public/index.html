@@ -131,6 +131,15 @@
 
 
 		socket.on("message", function (msg) {
+			console.log(msg);
+
+			
+
+			if(document.visibilityState == "hidden"){
+				// push notification body
+				displayNotification(`${msg.username}: ${msg.msg}`)
+			}
+
 			// creating p element when text is entered
 			var p = document.createElement('p');
 			p.className = "mainChatView__other";
@@ -157,6 +166,12 @@
 
 
 		socket.on("userjoin", function (msg) {
+
+			if(document.visibilityState == "hidden"){
+				// push notification body
+				displayNotification(`${msg} has joined chat`)
+			}
+
 			var p = document.createElement('p');
 			let small = document.createElement("small");
 			small.className = "timestamp center";
@@ -189,14 +204,30 @@
     console.log('Notification permission status:', status);
 });
 
-function displayNotification() {
+function displayNotification(message) {
   if (Notification.permission == 'granted') {
     navigator.serviceWorker.getRegistration().then(function(reg) {
-      reg.showNotification('Hello world!');
+      var options = {
+        body: message,
+        icon: 'assets/images/catter128x128.png',
+        vibrate: [100, 50, 100],
+        data: {
+          dateOfArrival: Date.now(),
+          primaryKey: 1
+        },
+        actions: [
+          {action: 'explore', title: 'Explore this new world',
+            icon: 'images/checkmark.png'},
+          {action: 'close', title: 'Close notification',
+            icon: 'images/xmark.png'},
+        ]
+      };
+      reg.showNotification('Hello world!', options);
     });
   }
 }
-displayNotification();
+// push meddelse når siden loades
+// displayNotification();
 
 	</script>
 
